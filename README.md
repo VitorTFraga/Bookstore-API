@@ -69,4 +69,4 @@ I am currently working on:
 If you have any questions, suggestions, or feedback about the project, you can find me here:
 
 * **GitHub:** [VitorTFraga](https://github.com/VitorTFraga) 
-* **LinkedIn:** [LinkedIn]()
+* **LinkedIn:** [LinkedIn](https://www.linkedin.com/in/vitor-táboas-fraga-002651212/)
