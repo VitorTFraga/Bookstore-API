@@ -56,8 +56,8 @@ I am currently working on:
     npm install
     ```
 4.  **Set up your environment variables:**
-    `Create a .env file in the root directory and add your connection string:
-    MONGODB_CONNECTION_STRING=your_mongodb_uri_here`
+    Create a `.env` file in the root directory and add your connection string:
+    `MONGODB_CONNECTION_STRING=your_mongodb_uri_here`
 
 5.  **Run the server:**
     ```bash
@@ -69,4 +69,4 @@ I am currently working on:
 If you have any questions, suggestions, or feedback about the project, you can find me here:
 
 * **GitHub:** [VitorTFraga](https://github.com/VitorTFraga) 
-* **LinkedIn:** [LinkedIn]()
+* **LinkedIn:** [LinkedIn](https://www.linkedin.com/in/vitor-táboas-fraga-002651212/)
