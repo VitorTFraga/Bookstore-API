@@ -1,5 +1,5 @@
 import NotFound from "../error/NotFound.js";
-import book from "../models/book.js";
+import {book} from "../models/index.js";
 
 
 class BookController{
@@ -80,12 +80,17 @@ class BookController{
         }
     }
 
-    static async findPublisher(req, res, next){
+    static async findBookFilter(req, res, next){
 
-        const publisher = req.query.publisher
         try {
+
+            const search = {};
+            const {editora, titulo} = req.query
+
+            if(editora) search.publisher = editora;
+            if(titulo) search.title = titulo;
             
-            const newPublisher = await book.find({publisher: publisher})//por ter o mesmo nome poderia escrever só {publisher}
+            const newPublisher = await book.find(search)//por ter o mesmo nome poderia escrever só {publisher}
             res.status(200).json({newPublisher})
         } catch (err) {
             next(err);
