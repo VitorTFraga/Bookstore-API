@@ -8,8 +8,10 @@ class AuthorController{
 
         try {
 
-            const findAuthor = await author.find({});
-            res.status(200).json(findAuthor)
+            const findAuthor = author.find();
+            req.results = findAuthor
+            
+            next()
         } catch (err) {
             
             next(err);

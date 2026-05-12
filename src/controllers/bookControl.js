@@ -1,5 +1,5 @@
 import NotFound from "../error/NotFound.js";
-import {book} from "../models/index.js";
+import {author, book} from "../models/index.js";
 
 
 class BookController{
@@ -8,13 +8,15 @@ class BookController{
 
         try {
             
-            const getBooks = await book.find({})//.find é um metodo moongose
-            res.status(200).json(getBooks)
-        } catch (err) {
+            const findBooks = book.find();
+
+            req.results = findBooks;
+
+            next()
+        }catch (err) {
             next(err);
-            
-        }
-        
+                
+        }      
     }
 
     static async showBook (req, res,next){
@@ -23,6 +25,8 @@ class BookController{
 
             const id = req.params.id;
             const idBook = await book.findById(id)
+                .populate("author")
+                .exec()
             
             if (idBook !==null) {
                 res.status(200).json(idBook);
@@ -84,18 +88,53 @@ class BookController{
 
         try {
 
-            const search = {};
-            const {editora, titulo} = req.query
-
-            if(editora) search.publisher = editora;
-            if(titulo) search.title = titulo;
+            const searchMethod = await filterFinder(req.query)
             
-            const newPublisher = await book.find(search)//por ter o mesmo nome poderia escrever só {publisher}
-            res.status(200).json({newPublisher})
+            if(searchMethod != null){
+
+                const bookQuery = book
+                    .find(searchMethod)
+                    .populate("author")
+
+                req.results = bookQuery
+                next()
+            }else{
+
+                res.status(200).send([])
+            }
+
         } catch (err) {
             next(err);
         }
     }
+}
+
+async function filterFinder (params){
+
+    let search = {};
+    const {editora, titulo, minPaginas, maxPaginas, autor } = params;
+
+    if(editora) search.publisher = editora;
+    if(titulo) search.title = {$regex: titulo, $options: "i"};
+
+    if(minPaginas || maxPaginas)search.pages = {}
+
+    if(minPaginas) search.pages.$gte = minPaginas;
+    if(maxPaginas) search.pages.$lte = maxPaginas;
+    
+    if(autor){
+        const authorFound =await author.findOne({name: autor})
+
+        if(authorFound !== null){
+    
+            search.author = authorFound._id
+        }else{
+
+            search = null
+        }
+    }
+
+    return search;
 }
 
 export default BookController;

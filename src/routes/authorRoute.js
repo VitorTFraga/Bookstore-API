@@ -1,9 +1,10 @@
 import express from 'express'
 import AuthorController from '../controllers/authorControl.js'
+import pagination from '../middlewares/pagination.js';
 
 const route = express.Router()
 
-route.get('/autores', AuthorController.listAuthors);
+route.get('/autores', AuthorController.listAuthors, pagination);
 route.get('/autores/:id', AuthorController.listAuthor);
 route.post('/autores', AuthorController.createAuthor);
 route.put('/autores/:id', AuthorController.updateAuthor);
