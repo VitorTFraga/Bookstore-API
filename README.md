@@ -33,13 +33,20 @@ One of the core focuses of this project is **Application Security (AppSec)**:
 * **Validation:** Implementation of robust input validation to prevent common injection attacks.
 * **Environment Management:** Sensitive data is kept out of the source code using `.env` files.
 
+## 🛠️ Support & Troubleshooting
+The API implements a robust logging structure designed to facilitate rapid issue identification. Each request is processed through centralized middlewares that generate descriptive logs, allowing for a clear distinction between infrastructure errors and user-side data input issues.
+
+This setup acts as a technical foundation for troubleshooting, enabling:
+- **Fast Triagem:** By reviewing logs, it is possible to identify if a failure stems from a database connection (infrastructure) or invalid input (user validation).
+- **Auditability:** Every error is captured, logged, and masked for the user, ensuring system stability and security while providing the necessary technical details for maintenance.
+
 ## 🚧 Current Development Status
 I am currently working on:
 - [x] Initial MVC structure and database connection.
 - [x] Custom error handling system.
 - [ ] Authentication and Authorization (JWT).
-- [ ] Advanced query filters (pagination, sorting).
-- [ ] Comprehensive documentation with Postman Collections.
+- [x] Advanced query filters (pagination, sorting).
+- [x] Comprehensive documentation with Postman Collections.
 
 ## ⚙️ How to Run (Development)
 1. **Clone the repository:** 
